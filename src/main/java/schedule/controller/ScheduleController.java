@@ -1,6 +1,8 @@
 package schedule.controller;
 
 import global.view.InputView;
+import java.util.List;
+import schedule.entity.Schedule;
 import schedule.service.ScheduleService;
 
 public class ScheduleController {
@@ -15,7 +17,7 @@ public class ScheduleController {
         try {
             String inputMonthAndDayOfWeek = InputView.inputMonthAndDatOfWeek();
             scheduleService.setUpDefaultScheduleTable(inputMonthAndDayOfWeek);
-        } catch(IllegalArgumentException e) {
+        } catch (IllegalArgumentException e) {
             System.out.println(e.getMessage());
             setUpDefaultScheduleTable();
         }

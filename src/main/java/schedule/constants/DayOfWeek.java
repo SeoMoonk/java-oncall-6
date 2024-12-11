@@ -28,7 +28,27 @@ public enum DayOfWeek {
         return Optional.empty();
     }
 
+    public static DayOfWeek getByValue(int value) {
+        for(DayOfWeek d : DayOfWeek.values()) {
+            if(d.value == value) {
+                return d;
+            }
+        }
+        return null;
+    }
+
     public int getValue() {
         return value;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public static boolean isWeekEnd(int dayOfWeekValue) {
+        if(dayOfWeekValue == SATURDAY.getValue() || dayOfWeekValue == SUNDAY.getValue()) {
+            return true;
+        }
+        return false;
     }
 }
