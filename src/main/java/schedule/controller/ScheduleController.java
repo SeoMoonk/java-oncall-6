@@ -12,7 +12,13 @@ public class ScheduleController {
     }
 
     public void setUpDefaultScheduleTable() {
-        String inputMonthAndDayOfWeek = InputView.inputMonthAndDatOfWeek();
-        System.out.println(inputMonthAndDayOfWeek);
+        try {
+            String inputMonthAndDayOfWeek = InputView.inputMonthAndDatOfWeek();
+            scheduleService.setUpDefaultScheduleTable(inputMonthAndDayOfWeek);
+        } catch(IllegalArgumentException e) {
+            System.out.println(e.getMessage());
+            setUpDefaultScheduleTable();
+        }
+
     }
 }
