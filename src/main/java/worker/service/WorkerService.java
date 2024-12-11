@@ -3,6 +3,7 @@ package worker.service;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Optional;
 import worker.constants.WorkerType;
 import worker.entity.Worker;
 import worker.repository.WorkerRepository;
@@ -21,6 +22,15 @@ public class WorkerService {
         List<String> names = new ArrayList<>();
         validateInputWorkers(inputWorkers, type);
         names = Arrays.asList(inputWorkers.split(","));
+
+        for(String name : names) {
+            Optional<Worker> maybeWorker = workerRepository.getByName(name);
+
+
+
+
+        }
+
         for (int i = 1; i <= names.size(); i++) {
             register(i, names.get(i - 1), type);
         }
