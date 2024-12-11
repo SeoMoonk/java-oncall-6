@@ -33,4 +33,8 @@ public class Schedule {
     public boolean isHoliday() {
         return isHoliday;
     }
+
+    public void applyPublicHoliday() {
+        isHoliday = true;
+    }
 }

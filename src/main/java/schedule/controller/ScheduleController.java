@@ -17,6 +17,7 @@ public class ScheduleController {
         try {
             String inputMonthAndDayOfWeek = InputView.inputMonthAndDatOfWeek();
             scheduleService.setUpDefaultScheduleTable(inputMonthAndDayOfWeek);
+            scheduleService.applyPublicHoliday();
         } catch (IllegalArgumentException e) {
             System.out.println(e.getMessage());
             setUpDefaultScheduleTable();

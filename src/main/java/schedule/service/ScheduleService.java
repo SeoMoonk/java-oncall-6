@@ -1,9 +1,12 @@
 package schedule.service;
 
+import java.rmi.NoSuchObjectException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 import schedule.constants.DayOfWeek;
 import schedule.constants.Month;
+import schedule.constants.PublicHoliday;
 import schedule.entity.Schedule;
 import schedule.repository.ScheduleRepository;
 import schedule.utils.ScheduleParser;
@@ -43,5 +46,28 @@ public class ScheduleService {
 
     public List<Schedule> getAll() {
         return scheduleRepository.findAll();
+    }
+
+    public void applyPublicHoliday() {
+        int monthValue = getByDayValue(1).getMonthValue();
+        List<PublicHoliday> publicHolidays = PublicHoliday.getAllByMonthValue(monthValue);
+
+        for(PublicHoliday h : publicHolidays) {
+            Schedule schedule = getByDayValue(h.getDayValue());
+            schedule.applyPublicHoliday();
+            modify(schedule);
+        }
+    }
+
+    private Schedule getByDayValue(int dayValue) {
+        Optional<Schedule> maybeDayValue = scheduleRepository.findByDayValue(dayValue);
+        if(maybeDayValue.isEmpty()) {
+            throw new IllegalArgumentException("[ERROR] 접근할 수 없는 값입니다.");
+        }
+        return maybeDayValue.get();
+    }
+
+    private void modify(Schedule schedule) {
+        scheduleRepository.modify(schedule);
     }
 }
