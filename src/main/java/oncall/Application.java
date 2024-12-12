@@ -12,5 +12,6 @@ public class Application {
 
         scheduleController.setUpDefaultScheduleTable();
         workerController.employmentWorkers();
+        scheduleController.assign();
     }
 }

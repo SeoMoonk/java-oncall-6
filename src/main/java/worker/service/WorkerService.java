@@ -23,14 +23,6 @@ public class WorkerService {
         validateInputWorkers(inputWorkers, type);
         names = Arrays.asList(inputWorkers.split(","));
 
-        for(String name : names) {
-            Optional<Worker> maybeWorker = workerRepository.getByName(name);
-
-
-
-
-        }
-
         for (int i = 1; i <= names.size(); i++) {
             register(i, names.get(i - 1), type);
         }

@@ -43,4 +43,8 @@ public class Schedule {
     public void assignWorker(Worker worker) {
         this.worker = worker;
     }
+
+    public Worker getWorker() {
+        return worker;
+    }
 }

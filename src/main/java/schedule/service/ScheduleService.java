@@ -81,6 +81,8 @@ public class ScheduleService {
             sundaySchedules.removeFirst();
         }
 
+        weeklySchedules.add(getBetweenStartDayValueAndEndDayValue(startDay, getAll().size()));
+
         return weeklySchedules;
     }
 
@@ -94,5 +96,9 @@ public class ScheduleService {
 
     public List<Schedule> getBetweenStartDayValueAndEndDayValue(int startDayValue, int endDayValue) {
         return scheduleRepository.findBetweenStartDayValueAndEndDayValue(startDayValue, endDayValue);
+    }
+
+    public String getLastDayWorkersName(int dayValue) {
+        return scheduleRepository.findByDayValue(dayValue-1).get().getWorker().getName();
     }
 }

@@ -4,6 +4,7 @@ import schedule.controller.ScheduleController;
 import schedule.repository.ScheduleRepository;
 import schedule.repository.ScheduleRepositoryImpl;
 import schedule.service.ScheduleService;
+import schedule.service.SchedulerService;
 import worker.controller.WorkerController;
 import worker.repository.WorkerRepository;
 import worker.repository.WorkerRepositoryImpl;
@@ -13,6 +14,7 @@ public class AppConfig {
 
     private final ScheduleController scheduleController;
     private final ScheduleService scheduleService;
+    private final SchedulerService schedulerService;
     private final ScheduleRepository scheduleRepository;
 
     private final WorkerController workerController;
@@ -20,13 +22,14 @@ public class AppConfig {
     private final WorkerRepository workerRepository;
 
     public AppConfig() {
-        scheduleRepository = new ScheduleRepositoryImpl();
-        scheduleService = new ScheduleService(scheduleRepository);
-        scheduleController = new ScheduleController(scheduleService);
-
         workerRepository = new WorkerRepositoryImpl();
         workerService = new WorkerService(workerRepository);
         workerController = new WorkerController(workerService);
+
+        scheduleRepository = new ScheduleRepositoryImpl();
+        scheduleService = new ScheduleService(scheduleRepository);
+        schedulerService = new SchedulerService(scheduleService, workerService);
+        scheduleController = new ScheduleController(scheduleService, schedulerService);
     }
 
     public ScheduleController getScheduleController() {

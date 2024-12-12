@@ -52,6 +52,6 @@ public class ScheduleRepositoryImpl implements ScheduleRepository {
 
     @Override
     public List<Schedule> findBetweenStartDayValueAndEndDayValue(int startDayValue, int endDayValue) {
-        return storedSchedules.subList(startDayValue, endDayValue);
+        return storedSchedules.subList(startDayValue-1, endDayValue);
     }
 }
